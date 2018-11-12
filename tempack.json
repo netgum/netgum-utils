@@ -1,0 +1,16 @@
+{
+  "mergePackageWith": {
+    "version": "0.0.1",
+    "main": "./index.js",
+    "types": "./index.d.ts"
+  },
+  "omitPackageKeys": [
+    "private",
+    "devDependencies",
+    "scripts",
+    "jest"
+  ],
+  "copyFiles": [
+    "README.md"
+  ]
+}

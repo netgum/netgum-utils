@@ -1,0 +1,59 @@
+{
+  "name": "@netgum/utils",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Utilities",
+  "author": {
+    "name": "Stanislaw Glogowski",
+    "email": "hello@newobject.pl"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netgum/utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/netgum/utils/issues"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist/*",
+    "precompile": "npm run lint && npm run test && npm run clean",
+    "compile": "tsc",
+    "compile:watch": "tsc --watch",
+    "postcompile": "tempack ./dist/",
+    "prebuild": "npm run lint && npm run test",
+    "build": "npm run compile",
+    "lint": "tslint src/**/*.ts",
+    "test": "jest",
+    "test:watch": "jest --watch --verbose false"
+  },
+  "dependencies": {
+    "bn.js": "^4.11.8",
+    "idna-uts46-hx": "^2.3.1",
+    "keccak": "^1.4.0",
+    "secp256k1": "^3.5.2",
+    "unorm": "^1.4.1"
+  },
+  "devDependencies": {
+    "@netgum/types": "0.0.2",
+    "@types/jest": "^23.3.9",
+    "@types/node": "^10.12.5",
+    "jest": "^23.6.0",
+    "rimraf": "^2.6.2",
+    "tempack": "^1.1.0",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(\\.spec)\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ]
+  }
+}
