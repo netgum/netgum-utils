@@ -1,4 +1,4 @@
-# Utilities
+# Netgum utilities
 
 [![NPM version][npm-image]][npm-url]
  

@@ -2,7 +2,7 @@
   "name": "@netgum/utils",
   "private": true,
   "version": "0.0.0",
-  "description": "Utilities",
+  "description": "Netgum utilities",
   "author": {
     "name": "Stanislaw Glogowski",
     "email": "hello@newobject.pl"
@@ -35,7 +35,7 @@
     "unorm": "^1.4.1"
   },
   "devDependencies": {
-    "@netgum/types": "0.0.2",
+    "@netgum/types": "0.0.3",
     "@types/jest": "^23.3.9",
     "@types/node": "^10.12.5",
     "jest": "^23.6.0",
