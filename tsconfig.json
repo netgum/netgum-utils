@@ -11,7 +11,10 @@
     "outDir": "./dist",
     "typeRoots": [
       "node_modules/@types",
-      "node_modules/@netgum/types"
+      "node_modules/@netgum/types/bn.js",
+      "node_modules/@netgum/types/idna-uts46-hx",
+      "node_modules/@netgum/types/keccak",
+      "node_modules/@netgum/types/secp256k1"
     ],
     "lib": [
       "dom",
