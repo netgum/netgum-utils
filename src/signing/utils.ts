@@ -67,3 +67,12 @@ export function recoverAddressFromPersonalMessage(message: Buffer | string, sign
   const publicKey = recoverPublicKeyFromPersonalMessage(message, signature);
   return publicKey ? publicKeyToAddress(publicKey) : null;
 }
+
+/**
+ * gets method signature
+ * @param name
+ * @param args
+ */
+export function getMethodSignature(name: string, ...args: string[]): Buffer {
+  return sha3(`${name}(${args.join(",")})`).slice(0, 4);
+}

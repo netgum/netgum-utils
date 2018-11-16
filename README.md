@@ -8,15 +8,68 @@
   $ npm i @netgum/utils -S
 ```
 
-## Api
+## API
 
-(TODO)
+### ABI
 
-## Testing
+##### `abiEncodePacked(...types: string[]): (...args: any[]) => Buffer`
 
-```bash
-  $ npm test
-```
+### Address
+
+##### `targetToAddress(target: any): string`
+##### `prepareAddress(address: string | Buffer): string`
+##### `publicKeyToAddress(publicKey: Buffer): string`
+##### `privateKeyToAddress(privateKey: Buffer): string`
+
+### BN
+
+##### `anyToBN(data: any = 0, options: IAnyToBNOptions = {}): BN.IBN`
+
+### Buffer
+
+##### `anyToBuffer(data: any = Buffer.alloc(0), options: IAnyToBufferOptions = {}): Buffer`
+
+### Crypto
+
+##### `sha3(...args: any[]): Buffer`
+
+### ECDSA
+
+##### `verifyPublicKey(publicKey: Buffer): boolean`
+##### `verifyPrivateKey(privateKey: Buffer): boolean`
+##### `privateToPublicKey(privateKey: Buffer): Buffer`
+##### `generateRandomPrivateKey(): Buffer`
+
+### ENS
+
+##### `normalizeEnsName(...parts: string[]): string`
+##### `getEnsNameInfo(...parts: string[]): IEnsNameInfo`
+##### `getEnsNameHash(name: string): string`
+##### `getEnsLabelHash(label: string): string`
+
+### Hex
+
+##### `anyToHex(data: any = Buffer.alloc(0), options: IAnyToHexOptions = {}): string`
+##### `prepareHex(hex: string, options: IPrepareHexOptions = {}): string`
+
+### JSON
+
+##### `jsonReplacer(key: string, value: any): any`
+##### `jsonReviver(key: any, value: any): any`
+
+### Signing
+
+##### `hashPersonalMessage(message: Buffer | string): Buffer`
+##### `signPersonalMessage(message: Buffer | string, privateKey: Buffer): Buffer`
+##### `recoverPublicKeyFromPersonalMessage(message: Buffer | string, signature: Buffer | string): Buffer`
+##### `recoverAddressFromPersonalMessage(message: Buffer | string, signature: Buffer | string): string`
+##### `getMethodSignature(name: string, ...args: string[]): Buffer`
+
+### Units
+
+##### `convertUnit(value: number | BN.IBN, from: Units = Units.Wei, to: Units = Units.Ether): BN.IBN`
+##### `ethToWei(value: number): BN.IBN`
+##### `weiToEth(value: BN.IBN): number`
 
 ## License
 

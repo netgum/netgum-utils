@@ -1,14 +1,4 @@
 import { anyToBuffer } from "../buffer";
-import { sha3 } from "../crypto";
-
-/**
- * gets abi method signature
- * @param name
- * @param args
- */
-export function getAbiMethodSignature(name: string, ...args: string[]): Buffer {
-  return sha3(`${name}(${args.join(",")})`).slice(0, 4);
-}
 
 /**
  * abi encode packed

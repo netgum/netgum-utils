@@ -10,10 +10,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/netgum/utils.git"
+    "url": "https://github.com/netgum/netgum-utils.git"
   },
   "bugs": {
-    "url": "https://github.com/netgum/utils/issues"
+    "url": "https://github.com/netgum/netgum-utils/issues"
   },
   "scripts": {
     "clean": "rimraf ./dist/*",

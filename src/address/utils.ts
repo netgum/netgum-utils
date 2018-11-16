@@ -1,5 +1,6 @@
-import { publicKeyConvert, publicKeyVerify } from "secp256k1";
+import { publicKeyConvert } from "secp256k1";
 import { sha3 } from "../crypto";
+import { privateToPublicKey, verifyPublicKey } from "../ecdsa";
 import { anyToHex } from "../hex";
 import { ZERO_ADDRESS } from "./constatnts";
 
@@ -51,10 +52,31 @@ export function publicKeyToAddress(publicKey: Buffer): string {
 
   try {
     publicKey = publicKeyConvert(publicKey, false);
-    if (publicKeyVerify(publicKey)) {
+    if (verifyPublicKey(publicKey)) {
       result = anyToHex(sha3(publicKey.slice(1)).slice(-20), {
         add0x: true,
       });
+    }
+
+  } catch (err) {
+    result = null;
+  }
+
+  return result;
+}
+
+/**
+ * converts private key to address
+ * @param privateKey
+ */
+export function privateKeyToAddress(privateKey: Buffer): string {
+  let result: string = null;
+
+  try {
+    const publicKey = privateToPublicKey(privateKey);
+
+    if (publicKey) {
+      result = publicKeyToAddress(publicKey);
     }
 
   } catch (err) {
