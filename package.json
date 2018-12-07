@@ -2,7 +2,7 @@
   "name": "@netgum/utils",
   "private": true,
   "version": "0.0.0",
-  "description": "Netgum utilities",
+  "description": "NetGum utilities",
   "author": {
     "name": "Stanislaw Glogowski",
     "email": "hello@newobject.pl"
@@ -10,20 +10,18 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/netgum/netgum-utils.git"
+    "url": "https://github.com/netgum/utils.git"
   },
   "bugs": {
-    "url": "https://github.com/netgum/netgum-utils/issues"
+    "url": "https://github.com/netgum/utils/issues"
   },
   "scripts": {
-    "clean": "rimraf ./dist/*",
-    "precompile": "npm run lint && npm run test && npm run clean",
-    "compile": "tsc",
-    "compile:watch": "tsc --watch",
-    "postcompile": "tempack ./dist/",
-    "prebuild": "npm run lint && npm run test",
-    "build": "npm run compile",
-    "lint": "tslint src/**/*.ts",
+    "ts:lint": "tslint --project tsconfig.json src/**/*.ts",
+    "ts:compile": "tsc",
+    "prebuild": "npm run ts:lint && rimraf ./dist/*",
+    "build": "npm run ts:compile",
+    "postbuild": "tempack ./dist/",
+    "pretest": "npm run ts:lint",
     "test": "jest",
     "test:watch": "jest --watch --verbose false"
   },
@@ -35,22 +33,24 @@
     "unorm": "^1.4.1"
   },
   "devDependencies": {
-    "@netgum/types": "0.0.3",
-    "@types/jest": "^23.3.9",
-    "@types/node": "^10.12.5",
+    "@netgum/types": "0.0.4",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.12",
     "jest": "^23.6.0",
     "rimraf": "^2.6.2",
     "tempack": "^1.1.0",
-    "ts-jest": "^23.10.4",
+    "ts-jest": "^23.10.5",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6"
+    "tslint-config-airbnb": "^5.11.1",
+    "tsutils": "^3.5.2",
+    "typescript": "^3.2.2"
   },
   "jest": {
     "testEnvironment": "node",
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(\\.spec)\\.ts$",
+    "testRegex": "(\\.test)\\.ts$",
     "moduleFileExtensions": [
       "ts",
       "js"
