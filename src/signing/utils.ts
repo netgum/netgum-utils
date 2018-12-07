@@ -1,7 +1,7 @@
-import { recover, publicKeyVerify, sign } from "secp256k1";
-import { publicKeyToAddress } from "../address";
-import { anyToBuffer } from "../buffer";
-import { sha3 } from "../crypto";
+import { recover, publicKeyVerify, sign } from 'secp256k1';
+import { publicKeyToAddress } from '../address';
+import { anyToBuffer } from '../buffer';
+import { sha3 } from '../crypto';
 
 /**
  * hashes personal message
@@ -9,7 +9,7 @@ import { sha3 } from "../crypto";
  */
 export function hashPersonalMessage(message: Buffer | string): Buffer {
   return sha3(
-    anyToBuffer("\x19Ethereum Signed Message:\n32"),
+    anyToBuffer('\x19Ethereum Signed Message:\n32'),
     sha3(message),
   );
 }
@@ -38,7 +38,7 @@ export function recoverPublicKeyFromPersonalMessage(message: Buffer | string, si
   const hash = hashPersonalMessage(message);
   const signatureBuff = anyToBuffer(signature);
   const s = signatureBuff.slice(0, -1);
-  const r = signatureBuff[ signatureBuff.length - 1 ] - 27;
+  const r = signatureBuff[signatureBuff.length - 1] - 27;
 
   let result: Buffer = null;
 
@@ -74,5 +74,5 @@ export function recoverAddressFromPersonalMessage(message: Buffer | string, sign
  * @param args
  */
 export function getMethodSignature(name: string, ...args: string[]): Buffer {
-  return sha3(`${name}(${args.join(",")})`).slice(0, 4);
+  return sha3(`${name}(${args.join(',')})`).slice(0, 4);
 }

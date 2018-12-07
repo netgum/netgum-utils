@@ -1,5 +1,5 @@
-import { randomBytes } from "crypto";
-import { publicKeyVerify, privateKeyVerify, publicKeyCreate } from "secp256k1";
+import { randomBytes } from 'crypto';
+import { publicKeyVerify, privateKeyVerify, publicKeyCreate } from 'secp256k1';
 
 /**
  * verifies public key

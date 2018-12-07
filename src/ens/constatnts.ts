@@ -1,1 +1,1 @@
-export const ENS_NAME_SEPARATOR = ".";
+export const ENS_NAME_SEPARATOR = '.';

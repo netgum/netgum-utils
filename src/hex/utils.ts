@@ -1,5 +1,5 @@
-import * as BN from "bn.js";
-import { IAnyToHexOptions, IPrepareHexOptions } from "./interfaces";
+import * as BN from 'bn.js';
+import { IAnyToHexOptions, IPrepareHexOptions } from './interfaces';
 
 /**
  * converts any to hex
@@ -20,43 +20,43 @@ export function anyToHex(data: any = Buffer.alloc(0), options: IAnyToHexOptions 
 
   if (data) {
     switch (typeof data) {
-      case "number":
+      case 'number':
         result = (data as number).toString(16);
         break;
 
-      case "string":
-        result = ((data as string).startsWith("0x") || options.autoStringDetect)
+      case 'string':
+        result = ((data as string).startsWith('0x') || options.autoStringDetect)
           ? prepareHex(data)
           : null;
 
         if (!result) {
-          result = Buffer.from(data, "utf8").toString("hex");
+          result = Buffer.from(data, 'utf8').toString('hex');
         }
         break;
 
-      case "boolean":
-        result = data ? "1" : "0";
+      case 'boolean':
+        result = data ? '1' : '0';
         break;
 
-      case "object":
+      case 'object':
         if (Buffer.isBuffer(data)) {
-          result = (data as Buffer).toString("hex");
+          result = (data as Buffer).toString('hex');
         } else if (BN.isBN(data)) {
           result = (data as BN.IBN).toString(16);
         } else if (data instanceof Uint8Array) {
           result = Buffer.from([
             ...data,
-          ]).toString("hex");
+          ]).toString('hex');
         }
         break;
     }
   }
 
-  if (typeof result === "string") {
+  if (typeof result === 'string') {
     result = result.toLowerCase();
 
     if (options.length > result.length) {
-      result = `${"0".repeat(options.length - result.length)}${result}`;
+      result = `${'0'.repeat(options.length - result.length)}${result}`;
     }
 
     if (options.evenLength && result.length % 2) {
@@ -85,23 +85,23 @@ export function prepareHex(hex: string, options: IPrepareHexOptions = {}): strin
 
   let result: string = null;
 
-  hex = hex.toLowerCase();
+  let value = hex.toLowerCase();
 
-  if (hex.startsWith("0x")) {
-    hex = hex.slice(2);
+  if (value.startsWith('0x')) {
+    value = value.slice(2);
   }
 
   try {
-    const data = (hex.length % 2) ? `0${hex}` : hex;
-    if (Buffer.from(data, "hex")) {
-      result = options.evenLength ? data : hex;
+    const data = (value.length % 2) ? `0${value}` : value;
+    if (Buffer.from(data, 'hex')) {
+      result = options.evenLength ? data : value;
     }
   } catch (err) {
     result = null;
   }
 
   if (
-    typeof result === "string" &&
+    typeof result === 'string' &&
     options.add0x
   ) {
     result = `0x${result}`;

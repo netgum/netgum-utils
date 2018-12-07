@@ -1,8 +1,8 @@
-import { publicKeyConvert } from "secp256k1";
-import { sha3 } from "../crypto";
-import { privateToPublicKey, verifyPublicKey } from "../ecdsa";
-import { anyToHex } from "../hex";
-import { ZERO_ADDRESS } from "./constatnts";
+import { publicKeyConvert } from 'secp256k1';
+import { sha3 } from '../crypto';
+import { privateToPublicKey, verifyPublicKey } from '../ecdsa';
+import { anyToHex } from '../hex';
+import { ZERO_ADDRESS } from './constatnts';
 
 /**
  * converts target to address
@@ -12,12 +12,12 @@ export function targetToAddress(target: any): string {
   let result: string = null;
 
   switch (typeof target) {
-    case "string":
+    case 'string':
       result = (target as string) || null;
       break;
 
-    case "object":
-      if (target && typeof target.address === "string") {
+    case 'object':
+      if (target && typeof target.address === 'string') {
         result = target.address || null;
       }
       break;

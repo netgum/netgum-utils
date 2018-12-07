@@ -1,5 +1,5 @@
-import * as BN from "bn.js";
-import { JsonTypes } from "./constants";
+import * as BN from 'bn.js';
+import { JsonTypes } from './constants';
 
 /**
  * json replacer
@@ -7,7 +7,7 @@ import { JsonTypes } from "./constants";
  * @param value
  */
 export function jsonReplacer(key: string, value: any): any {
-  const data = this[ key ];
+  const data = this[key];
 
   if (data instanceof Date) {
     value = {
@@ -17,7 +17,7 @@ export function jsonReplacer(key: string, value: any): any {
   } else if (Buffer.isBuffer(data)) {
     value = {
       type: JsonTypes.Buffer,
-      data: (data as Buffer).toString("hex"),
+      data: (data as Buffer).toString('hex'),
     };
   } else if (BN.isBN(data)) {
     value = {
@@ -37,12 +37,12 @@ export function jsonReplacer(key: string, value: any): any {
 export function jsonReviver(key: any, value: any): any {
   if (
     value &&
-    typeof value === "object" &&
+    typeof value === 'object' &&
     value.type
   ) {
     switch (value.type) {
       case JsonTypes.Buffer:
-        value = Buffer.from(value.data, "hex");
+        value = Buffer.from(value.data, 'hex');
         break;
       case JsonTypes.BN:
         value = new BN(value.data, 16);

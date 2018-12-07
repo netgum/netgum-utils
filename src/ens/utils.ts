@@ -1,9 +1,9 @@
-import "unorm";
-import { toAscii } from "idna-uts46-hx";
-import { sha3 } from "../crypto";
-import { anyToHex } from "../hex";
-import { ENS_NAME_SEPARATOR } from "./constatnts";
-import { IEnsNameInfo } from "./interfaces";
+import 'unorm';
+import { toAscii } from 'idna-uts46-hx';
+import { sha3 } from '../crypto';
+import { anyToHex } from '../hex';
+import { ENS_NAME_SEPARATOR } from './constatnts';
+import { IEnsNameInfo } from './interfaces';
 
 /**
  * normalizes ens name
@@ -13,11 +13,11 @@ export function normalizeEnsName(...parts: string[]): string {
   let result: string = null;
 
   let name = parts
-    .filter((part) => !!part)
+    .filter(part => !!part)
     .join(ENS_NAME_SEPARATOR)
     .split(ENS_NAME_SEPARATOR)
-    .map((part) => part.toLowerCase().trim())
-    .filter((part) => !!part)
+    .map(part => part.toLowerCase().trim())
+    .filter(part => !!part)
     .join(ENS_NAME_SEPARATOR);
 
   if (name) {
@@ -60,7 +60,7 @@ export function getEnsNameInfo(...parts: string[]): IEnsNameInfo {
     const parts = name.split(ENS_NAME_SEPARATOR);
 
     if (parts.length > 1) {
-      const label = parts[ 0 ];
+      const label = parts[0];
       const name = parts.slice(1).join(ENS_NAME_SEPARATOR);
 
       if (label && name) {
@@ -91,7 +91,7 @@ export function getEnsNameHash(name: string): string {
     let node = Buffer.alloc(32, 0);
     const parts = name
       .split(ENS_NAME_SEPARATOR)
-      .map((part) => sha3(part))
+      .map(part => sha3(part))
       .reverse();
 
     for (const part of parts) {

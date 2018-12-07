@@ -1,6 +1,6 @@
-import * as BN from "bn.js";
-import { prepareHex } from "../hex";
-import { IAnyToBufferOptions } from "./interfaces";
+import * as BN from 'bn.js';
+import { prepareHex } from '../hex';
+import { IAnyToBufferOptions } from './interfaces';
 
 /**
  * converts any to buffer
@@ -18,37 +18,37 @@ export function anyToBuffer(data: any = Buffer.alloc(0), options: IAnyToBufferOp
   let result: Buffer = options.defaults;
 
   switch (typeof data) {
-    case "number": {
+    case 'number': {
       let hex = (data as number).toString(16);
       if (hex.length % 2) {
         hex = `0${hex}`;
       }
-      result = Buffer.from(hex, "hex");
+      result = Buffer.from(hex, 'hex');
       break;
     }
 
-    case "string":
-      const hex = ((data as string).startsWith("0x") || options.autoStringDetect)
+    case 'string':
+      const hex = ((data as string).startsWith('0x') || options.autoStringDetect)
         ? prepareHex(data, { evenLength: true })
         : null;
 
       if (hex) {
-        result = Buffer.from(hex, "hex");
+        result = Buffer.from(hex, 'hex');
       } else {
-        result = Buffer.from(data, "utf8");
+        result = Buffer.from(data, 'utf8');
       }
       break;
 
-    case "boolean":
+    case 'boolean':
       result = Buffer.alloc(1, data ? 1 : 0);
       break;
 
-    case "object":
+    case 'object':
       if (Buffer.isBuffer(data)) {
         result = data;
       } else if (BN.isBN(data)) {
         const hex = prepareHex((data as BN.IBN).toString(16), { evenLength: true });
-        result = Buffer.from(hex, "hex");
+        result = Buffer.from(hex, 'hex');
       } else if (data instanceof Uint8Array) {
         result = Buffer.from([
           ...data,

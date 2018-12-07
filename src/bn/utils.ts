@@ -1,6 +1,6 @@
-import * as BN from "bn.js";
-import { prepareHex } from "../hex";
-import { IAnyToBNOptions } from "./interfaces";
+import * as BN from 'bn.js';
+import { prepareHex } from '../hex';
+import { IAnyToBNOptions } from './interfaces';
 
 /**
  * converts any to BN
@@ -16,22 +16,22 @@ export function anyToBN(data: any = 0, options: IAnyToBNOptions = {}): BN.IBN {
   let result: BN.IBN = options.defaults;
 
   switch (typeof data) {
-    case "number":
+    case 'number':
       result = new BN(data as number, 10);
       break;
 
-    case "string":
+    case 'string':
       const hex = prepareHex(data as string);
       if (hex) {
         result = new BN(hex, 16);
       }
       break;
 
-    case "object":
+    case 'object':
       if (BN.isBN(data)) {
         result = data;
       } else if (Buffer.isBuffer(data)) {
-        result = new BN((data as Buffer).toString("hex"), 16);
+        result = new BN((data as Buffer).toString('hex'), 16);
       }
       break;
   }

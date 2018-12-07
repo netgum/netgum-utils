@@ -1,4 +1,4 @@
-import { IBN } from "bn.js";
+import { IBN } from 'bn.js';
 
 export interface IAnyToBNOptions {
   defaults?: IBN;

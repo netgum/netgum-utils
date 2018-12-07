@@ -1,5 +1,5 @@
-import * as BN from "bn.js";
-import { Units, unitsPow } from "./constants";
+import * as BN from 'bn.js';
+import { Units, unitsPow } from './constants';
 
 /**
  * converts unit
@@ -10,7 +10,7 @@ import { Units, unitsPow } from "./constants";
 export function convertUnit(value: number | BN.IBN, from: Units = Units.Wei, to: Units = Units.Ether): BN.IBN {
   let result: BN.IBN = null;
 
-  if (typeof value === "number") {
+  if (typeof value === 'number') {
     value = new BN(value, 10);
   }
 
@@ -19,8 +19,8 @@ export function convertUnit(value: number | BN.IBN, from: Units = Units.Wei, to:
   } else {
 
     try {
-      const fromPow = unitsPow[ from ];
-      const toPow = unitsPow[ to ];
+      const fromPow = unitsPow[from];
+      const toPow = unitsPow[to];
 
       if (fromPow.gt(toPow)) {
         result = value.mul(fromPow.div(toPow));
