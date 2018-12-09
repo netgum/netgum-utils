@@ -1,8 +1,33 @@
 import { publicKeyConvert } from 'secp256k1';
 import { sha3 } from '../crypto';
+import { abiEncodePacked } from '../abi';
 import { privateToPublicKey, verifyPublicKey } from '../ecdsa';
 import { anyToHex } from '../hex';
 import { ZERO_ADDRESS } from './constatnts';
+
+/**
+ * computes CREATE2 address
+ * @param deployer
+ * @param salt
+ * @param byteCode
+ */
+export function computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCode: Buffer | string): string {
+  const payload = abiEncodePacked(
+    'bytes',
+    'address',
+    'bytes32',
+    'bytes',
+  )(
+    '0xFF',
+    deployer,
+    salt,
+    sha3(byteCode),
+  );
+
+  return anyToHex(sha3(payload).slice(-20), {
+    add0x: true,
+  });
+}
 
 /**
  * converts target to address
