@@ -17,6 +17,7 @@
 
 ### Address
 
+##### `computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCode: Buffer | string): string`
 ##### `targetToAddress(target: any): string`
 ##### `prepareAddress(address: string | Buffer): string`
 ##### `publicKeyToAddress(publicKey: Buffer): string`
