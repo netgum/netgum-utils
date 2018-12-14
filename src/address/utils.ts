@@ -1,9 +1,38 @@
 import { publicKeyConvert } from 'secp256k1';
-import { sha3 } from '../crypto';
 import { abiEncodePacked } from '../abi';
+import { anyToBuffer } from '../buffer';
+import { sha3 } from '../crypto';
 import { privateToPublicKey, verifyPublicKey } from '../ecdsa';
-import { anyToHex } from '../hex';
 import { ZERO_ADDRESS } from './constatnts';
+
+/**
+ * to checksum address
+ * @param address
+ */
+export function toChecksumAddress(address: string): string {
+  address = address.toLowerCase();
+
+  if (address.startsWith('0x')) {
+    address = address.slice(2);
+  }
+
+  const hash = sha3(address).toString('hex');
+  const chars = address
+    .split('')
+    .map((char, index) => parseInt(hash[index], 16) >= 8
+      ? char.toUpperCase()
+      : char,
+    );
+  return `0x${chars.join('')}`;
+}
+
+/**
+ * converts buffer to address
+ * @param buff
+ */
+export function bufferToAddress(buff: Buffer): string {
+  return toChecksumAddress(buff.toString('hex'));
+}
 
 /**
  * computes CREATE2 address
@@ -18,15 +47,36 @@ export function computeCreate2Address(deployer: string, salt: string | number | 
     'bytes32',
     'bytes',
   )(
-    '0xFF',
+    '0xff',
     deployer,
     salt,
     sha3(byteCode),
   );
 
-  return anyToHex(sha3(payload).slice(-20), {
-    add0x: true,
-  });
+  return bufferToAddress(sha3(payload).slice(-20));
+}
+
+/**
+ * verifies address
+ * @param address
+ * @param checksum
+ */
+export function verifyAddress(address: string, checksum: boolean = true): boolean {
+  let result: boolean = false;
+
+  if (
+    address &&
+    /^(0x)?[0-9a-fA-F]{40}$/i.test(address) &&
+    address !== ZERO_ADDRESS
+  ) {
+    if (checksum) {
+      result = address === toChecksumAddress(address);
+    } else {
+      result = true;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -52,17 +102,16 @@ export function targetToAddress(target: any): string {
 }
 
 /**
- * prepares address
+ * convert address
  * @param address
  */
-export function prepareAddress(address: string | Buffer): string {
-  let result = anyToHex(address, {
-    add0x: true,
-    length: 40,
-  });
+export function convertAddress(address: string): string {
+  let result: string = null;
 
-  if (result === ZERO_ADDRESS) {
-    result = null;
+  const buff = anyToBuffer(address);
+
+  if (buff && buff.length === 20) {
+    result = bufferToAddress(buff);
   }
 
   return result;
@@ -78,9 +127,7 @@ export function publicKeyToAddress(publicKey: Buffer): string {
   try {
     publicKey = publicKeyConvert(publicKey, false);
     if (verifyPublicKey(publicKey)) {
-      result = anyToHex(sha3(publicKey.slice(1)).slice(-20), {
-        add0x: true,
-      });
+      result = bufferToAddress(sha3(publicKey.slice(1)).slice(-20));
     }
 
   } catch (err) {
