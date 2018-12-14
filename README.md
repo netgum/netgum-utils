@@ -17,9 +17,12 @@
 
 ### Address
 
+##### `toChecksumAddress(address: string): string`
+##### `bufferToAddress(buff: Buffer): string`
 ##### `computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCode: Buffer | string): string`
+##### `verifyAddress(address: string, checksum: boolean = true): boolean`
 ##### `targetToAddress(target: any): string`
-##### `prepareAddress(address: string | Buffer): string`
+##### `convertAddress(address: string): string`
 ##### `publicKeyToAddress(publicKey: Buffer): string`
 ##### `privateKeyToAddress(privateKey: Buffer): string`
 
