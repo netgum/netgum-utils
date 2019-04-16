@@ -38,9 +38,9 @@ export function bufferToAddress(buff: Buffer): string {
  * computes CREATE2 address
  * @param deployer
  * @param salt
- * @param byteCode
+ * @param byteCodeHash
  */
-export function computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCode: Buffer | string): string {
+export function computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCodeHash: Buffer | string): string {
   const payload = abiEncodePacked(
     'bytes',
     'address',
@@ -50,7 +50,7 @@ export function computeCreate2Address(deployer: string, salt: string | number | 
     '0xff',
     deployer,
     salt,
-    sha3(byteCode),
+    byteCodeHash,
   );
 
   return bufferToAddress(sha3(payload).slice(-20));

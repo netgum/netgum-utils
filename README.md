@@ -19,7 +19,7 @@
 
 ##### `toChecksumAddress(address: string): string`
 ##### `bufferToAddress(buff: Buffer): string`
-##### `computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCode: Buffer | string): string`
+##### `computeCreate2Address(deployer: string, salt: string | number | Buffer, byteCodeHash: Buffer | string): string`
 ##### `verifyAddress(address: string, checksum: boolean = true): boolean`
 ##### `targetToAddress(target: any): string`
 ##### `convertAddress(address: string): string`
