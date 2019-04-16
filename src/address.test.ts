@@ -1,4 +1,5 @@
-import { verifyAddress, convertAddress, ZERO_ADDRESS } from './address';
+import { sha3 } from './crypto';
+import { verifyAddress, convertAddress, ZERO_ADDRESS, computeCreate2Address } from './address';
 
 describe('address', () => {
 
@@ -25,6 +26,30 @@ describe('address', () => {
     it('should convert address', () => {
       expect(convertAddress(address))
         .toBe(addressWithChecksum);
+    });
+  });
+
+  describe('computeCreate2Address()', () => {
+    // see: http://eips.ethereum.org/EIPS/eip-1014 (Example 5)
+    const deployer = '0x00000000000000000000000000000000deadbeef';
+    const salt = '0x00000000000000000000000000000000000000000000000000000000cafebabe';
+    const byteCode = '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef';
+    const address = '0x1d8bfDC5D46DC4f61D6b6115972536eBE6A8854C';
+
+    it('expect to compute correct address with byteCode', () => {
+      expect(computeCreate2Address(
+        deployer,
+        salt,
+        byteCode,
+      )).toBe(address);
+    });
+
+    it('expect to compute correct address with byteCode hash', () => {
+      expect(computeCreate2Address(
+        deployer,
+        salt,
+        sha3(byteCode),
+      )).toBe(address);
     });
   });
 });

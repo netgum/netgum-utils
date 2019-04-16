@@ -1,4 +1,4 @@
-import * as BN from 'bn.js';
+import BN, { IBN } from 'bn.js';
 import { IAnyToHexOptions, IPrepareHexOptions } from './interfaces';
 
 /**
@@ -42,7 +42,7 @@ export function anyToHex(data: any = Buffer.alloc(0), options: IAnyToHexOptions 
         if (Buffer.isBuffer(data)) {
           result = (data as Buffer).toString('hex');
         } else if (BN.isBN(data)) {
-          result = (data as BN.IBN).toString(16);
+          result = (data as IBN).toString(16);
         } else if (data instanceof Uint8Array) {
           result = Buffer.from([
             ...data,

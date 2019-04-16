@@ -5,6 +5,7 @@
       true,
       160
     ],
-    "no-parameter-reassignment": false
+    "no-parameter-reassignment": false,
+    "import-name": false
   }
 }

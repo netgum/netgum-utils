@@ -1,4 +1,4 @@
-import * as BN from 'bn.js';
+import BN, { IBN } from 'bn.js';
 import { prepareHex } from '../hex';
 import { IAnyToBufferOptions } from './interfaces';
 
@@ -47,7 +47,7 @@ export function anyToBuffer(data: any = Buffer.alloc(0), options: IAnyToBufferOp
       if (Buffer.isBuffer(data)) {
         result = data;
       } else if (BN.isBN(data)) {
-        const hex = prepareHex((data as BN.IBN).toString(16), { evenLength: true });
+        const hex = prepareHex((data as IBN).toString(16), { evenLength: true });
         result = Buffer.from(hex, 'hex');
       } else if (data instanceof Uint8Array) {
         result = Buffer.from([

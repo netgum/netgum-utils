@@ -1,4 +1,4 @@
-import * as BN from 'bn.js';
+import BN from 'bn.js';
 import { randomBytes } from 'crypto';
 import { anyToBuffer } from './buffer';
 

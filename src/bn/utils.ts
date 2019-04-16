@@ -1,4 +1,4 @@
-import * as BN from 'bn.js';
+import BN, { IBN } from 'bn.js';
 import { prepareHex } from '../hex';
 import { IAnyToBNOptions } from './interfaces';
 
@@ -7,13 +7,13 @@ import { IAnyToBNOptions } from './interfaces';
  * @param data
  * @param options
  */
-export function anyToBN(data: any = 0, options: IAnyToBNOptions = {}): BN.IBN {
+export function anyToBN(data: any = 0, options: IAnyToBNOptions = {}): IBN {
   options = {
     defaults: null,
     ...options,
   };
 
-  let result: BN.IBN = options.defaults;
+  let result: IBN = options.defaults;
 
   switch (typeof data) {
     case 'number':

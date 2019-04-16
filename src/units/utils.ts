@@ -1,4 +1,4 @@
-import * as BN from 'bn.js';
+import BN, { IBN } from 'bn.js';
 import { Units, unitsPow } from './constants';
 
 /**
@@ -7,8 +7,8 @@ import { Units, unitsPow } from './constants';
  * @param from
  * @param to
  */
-export function convertUnit(value: number | BN.IBN, from: Units = Units.Wei, to: Units = Units.Ether): BN.IBN {
-  let result: BN.IBN = null;
+export function convertUnit(value: number | IBN, from: Units = Units.Wei, to: Units = Units.Ether): IBN {
+  let result: IBN = null;
 
   if (typeof value === 'number') {
     value = new BN(value, 10);
@@ -40,7 +40,7 @@ export function convertUnit(value: number | BN.IBN, from: Units = Units.Wei, to:
  * converts eth to wei
  * @param value
  */
-export function ethToWei(value: number): BN.IBN {
+export function ethToWei(value: number): IBN {
   value = Math.floor(value * Math.pow(10, 6));
   return convertUnit(value, Units.Szabo, Units.Wei);
 }
@@ -49,7 +49,7 @@ export function ethToWei(value: number): BN.IBN {
  * converts wei to eth
  * @param value
  */
-export function weiToEth(value: BN.IBN): number {
+export function weiToEth(value: IBN): number {
   value = convertUnit(value, Units.Wei, Units.Szabo);
   return value.toNumber() / Math.pow(10, 6);
 }

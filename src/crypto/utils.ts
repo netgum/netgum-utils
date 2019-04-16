@@ -1,4 +1,4 @@
-import * as createSha3 from 'keccak';
+import createSha3 from 'keccak';
 import { anyToBuffer } from '../buffer';
 
 /**
