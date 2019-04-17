@@ -1,4 +1,4 @@
-import BN, { IBN } from 'bn.js';
+import BN from 'bn.js';
 
 export enum Units {
   Wei = 'Wei',
@@ -12,7 +12,7 @@ export enum Units {
 
 const base = new BN(10);
 
-export const unitsPow: { [key: string]: IBN } = {
+export const unitsPow: { [key: string]: BN } = {
   [Units.Wei]: new BN(1),
   [Units.Kwei]: base.pow(new BN(3)),
   [Units.Mwei]: base.pow(new BN(6)),

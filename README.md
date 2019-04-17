@@ -28,7 +28,7 @@
 
 ### BN
 
-* `anyToBN(data: any = 0, options: IAnyToBNOptions = {}): IBN`
+* `anyToBN(data: any = 0, options: IAnyToBNOptions = {}): BN`
 
 ### Buffer
 
@@ -72,9 +72,9 @@
 
 ### Units
 
-* `convertUnit(value: number | IBN, from: Units = Units.Wei, to: Units = Units.Ether): IBN`
-* `ethToWei(value: number): IBN`
-* `weiToEth(value: IBN): number`
+* `convertUnit(value: number | BN, from: Units = Units.Wei, to: Units = Units.Ether): BN`
+* `ethToWei(value: number): BN`
+* `weiToEth(value: BN): number`
 
 ## License
 

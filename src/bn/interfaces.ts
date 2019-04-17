@@ -1,5 +1,5 @@
-import { IBN } from 'bn.js';
+import BN from 'bn.js';
 
 export interface IAnyToBNOptions {
-  defaults?: IBN;
+  defaults?: BN;
 }

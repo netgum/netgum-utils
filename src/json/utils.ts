@@ -1,4 +1,4 @@
-import BN, { IBN } from 'bn.js';
+import BN from 'bn.js';
 import { JsonTypes } from './constants';
 
 /**
@@ -22,7 +22,7 @@ export function jsonReplacer(key: string, value: any): any {
   } else if (BN.isBN(data)) {
     value = {
       type: JsonTypes.BN,
-      data: (data as IBN).toString(16),
+      data: (data as BN).toString(16),
     };
   }
 
