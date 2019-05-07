@@ -1,7 +1,7 @@
 # NetGum utilities
 
 [![NPM version][npm-image]][npm-url]
-[![CircleCI](https://circleci.com/gh/netgum/utils.svg?style=svg)](https://circleci.com/gh/netgum/utils)
+[![CircleCI](https://circleci.com/gh/netgum/netgum-utils.svg?style=svg)](https://circleci.com/gh/netgum/netgum-utils)
  
 ## Installation
 
